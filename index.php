@@ -23,7 +23,15 @@ $view['mail'] = 'yingouqlj@163.com';
 //var_dump($view);
 function getDomain()
 {
-    return $_SERVER['SERVER_NAME'];
+    if(strpos($_SERVER["HTTP_HOST"],':')){
+        $domain=substr($_SERVER["HTTP_HOST"],0,strpos($_SERVER["HTTP_HOST"],':'));
+    }else{
+        $domain=$_SERVER["HTTP_HOST"];
+    }
+    if(substr($domain,0,4)=='www.'){
+        $domain=substr($domain,4,strlen($domain));
+    }
+    return $domain;
 }
 
 function getBrowserLanguage()
